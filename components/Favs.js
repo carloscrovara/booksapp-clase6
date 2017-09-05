@@ -10,8 +10,8 @@ class Favs extends Component {
 	render() {
  		return (
           <View style={styles.otroContainer}>
-            {this.props.ids.map((id) => 
-              <Text style={styles.containerTexto}>{id}</Text>
+            {this.props.ids.map((id) =>
+              <Text key={id} style={styles.containerTexto}>{id}</Text>
             )}
           </View>
  		);

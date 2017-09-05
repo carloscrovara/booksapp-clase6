@@ -35,9 +35,6 @@ class BookView extends Component {
         this.setState({ comments });
       });
   }
-  componentWillUnmount() {
-    this.db.off('value');
-  }
   goBack = () => {
     Actions.pop();
   }

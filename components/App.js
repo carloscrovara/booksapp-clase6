@@ -32,9 +32,9 @@ export default class Books extends Component {
 
   async componentDidMount() {
     try {
-      // await firebase.auth().createUserWithEmailAndPassword('mail@gmail.com', 'password');
+      //await firebase.auth().createUserWithEmailAndPassword('mail@gmail.com', 'password');
       const user = await firebase.auth().signInWithEmailAndPassword('mail@gmail.com', 'password');
-      //console.warn('user', user);
+      console.warn('user', user);
 
       // Puedo acceder desde cualquier lugar al usuario logueado con esta linea:
       // firebase.auth().currentUser;
