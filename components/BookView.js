@@ -32,7 +32,7 @@ class BookView extends Component {
           return;
         }
         const comments = JSON.parse(JSON.stringify(data));
-        this.setState({ comments });
+        this.setState({ comments: comments || [] });
       });
   }
   goBack = () => {
@@ -42,7 +42,15 @@ class BookView extends Component {
     this.props.addToFav(this.props.id);
   }
   comment = (e) => {
-    firebase.database().ref(`comments/${this.props.id}`).set([...this.state.comments, e.nativeEvent.text]);
+    if (!e.nativeEvent.text) return;
+    firebase
+      .database()
+      .ref(`comments/${this.props.id}`)
+      .set([e.nativeEvent.text, ...this.state.comments]);
+    this.setState({ comment: ''});
+  }
+  changedComment = (ref) => {
+    this.setState({ comment: ref.target.e});
   }
   render() {
     return (
@@ -72,11 +80,14 @@ class BookView extends Component {
           <Text>Ir atrás</Text>
         </TouchableOpacity>
         <TextInput
+          placeholder="Ingrese su comentario"
           onSubmitEditing={this.comment}
+          value={this.state.comment}
+          onChange={this.changedComment}
         />
         <View>
-          {this.state.comments.map((comentario) =>
-            <Text key={comentario}>{comentario}</Text>
+          {this.state.comments.map((comentario, i) =>
+            <Text key={i}>{comentario}</Text>
           )}
         </View>
       </View>

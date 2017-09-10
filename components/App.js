@@ -1,3 +1,4 @@
+(console:any).disableYellowBox = true;
 import React, { Component } from 'react';
 import {
   AppRegistry,
